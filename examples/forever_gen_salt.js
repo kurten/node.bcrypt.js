@@ -6,8 +6,8 @@ var bcrypt = require('../bcrypt');
 //     printSalt();
 //   });
 // })()
-var salt = bcrypt.genSalt(10);
+var salt = bcrypt.genSaltSync(10);
 console.log(salt);
-var pw = bcrypt.hash('123456', salt);
+var pw = bcrypt.hashSync('123456', salt);
 console.log(pw);
-console.log(bcrypt.compare('123456', pw));
+console.log(bcrypt.compareSync('123456', pw));

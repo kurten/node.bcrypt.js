@@ -1,4 +1,4 @@
-# node.bcrypt.js
+# fork from node.bcrypt.js
 
 [![Build Status](https://secure.travis-ci.org/ncb000gt/node.bcrypt.js.svg)](http://travis-ci.org/#!/ncb000gt/node.bcrypt.js)
 
@@ -58,39 +58,6 @@ npm install bcrypt
 
 ## Usage
 
-### async (recommended)
-
-To hash a password:
-
-```javascript
-var bcrypt = require('bcrypt');
-bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash('B4c0/\/', salt, function(err, hash) {
-        // Store hash in your password DB.
-    });
-});
-```
-
-To check a password:
-
-```javascript
-// Load hash from your password DB.
-bcrypt.compare('B4c0/\/', hash, function(err, res) {
-    // res == true
-});
-bcrypt.compare('not_bacon', hash, function(err, res) {
-    // res == false
-});
-```
-
-Auto-gen a salt and hash:
-
-```javascript
-bcrypt.hash('bacon', 8, function(err, hash) {
-});
-```
-
-
 ### sync
 
 To hash a password:
@@ -122,29 +89,12 @@ var hash = bcrypt.hashSync('bacon', 8);
 
   * `genSaltSync(rounds)`
     * `rounds` - [OPTIONAL] - the cost of processing the data. (default - 10)
-  * `genSalt(rounds, cb)`
-    * `rounds` - [OPTIONAL] - the cost of processing the data. (default - 10)
-    * `cb` - [REQUIRED] - a callback to be fired once the salt has been generated. uses eio making it asynchronous.
-      * `err` - First parameter to the callback detailing any errors.
-      * `salt` - Second parameter to the callback providing the generated salt.
   * `hashSync(data, salt)`
     * `data` - [REQUIRED] - the data to be encrypted.
     * `salt` - [REQUIRED] - the salt to be used in encryption.
-  * `hash(data, salt, cb)`
-    * `data` - [REQUIRED] - the data to be encrypted.
-    * `salt` - [REQUIRED] - the salt to be used to hash the password. if specified as a number then a salt will be generated and used (see examples).
-    * `cb` - [REQUIRED] - a callback to be fired once the data has been encrypted. uses eio making it asynchronous.
-      * `err` - First parameter to the callback detailing any errors.
-      * `encrypted` - Second parameter to the callback providing the encrypted form.
   * `compareSync(data, encrypted)`
     * `data` - [REQUIRED] - data to compare.
     * `encrypted` - [REQUIRED] - data to be compared to.
-  * `compare(data, encrypted, cb)`
-    * `data` - [REQUIRED] - data to compare.
-    * `encrypted` - [REQUIRED] - data to be compared to.
-    * `cb` - [REQUIRED] - a callback to be fired once the data has been compared. uses eio making it asynchronous.
-      * `err` - First parameter to the callback detailing any errors.
-      * `same` - Second parameter to the callback providing whether the data and encrypted forms match [true | false].
   * `getRounds(encrypted)` - return the number of rounds used to encrypt a given hash
     * `encrypted` - [REQUIRED] - hash from which the number of rounds used should be extracted.
 
